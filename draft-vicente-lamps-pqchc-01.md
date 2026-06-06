@@ -111,6 +111,45 @@ informative:
       org: "NSA"
     date: 2022-09
     target: https://www.nsa.gov/Cybersecurity/Post-Quantum-Cybersecurity-Resources/
+  FIPS180:
+    title: "Secure Hash Standard (SHS)"
+    author:
+      org: "NIST"
+    date: 2015-08
+    target: https://doi.org/10.6028/NIST.FIPS.180-4
+  FIPS202:
+    title: "SHA-3 Standard: Permutation-Based Hash and Extendable-Output Functions"
+    author:
+      org: "NIST"
+    date: 2015-08
+    target: https://doi.org/10.6028/NIST.FIPS.202
+  SHOR1994:
+    title: "Algorithms for Quantum Computation: Discrete Logarithms and Factoring"
+    author:
+      - ins: P.W. Shor
+        name: Peter W. Shor
+    date: 1994
+    seriesinfo:
+      "Proceedings of the 35th Annual Symposium on Foundations of Computer Science": "pp. 124-134"
+    target: https://doi.org/10.1109/SFCS.1994.365700
+  GROVER1996:
+    title: "A Fast Quantum Mechanical Algorithm for Database Search"
+    author:
+      - ins: L.K. Grover
+        name: Lov K. Grover
+    date: 1996
+    seriesinfo:
+      "Proceedings of the 28th Annual ACM Symposium on Theory of Computing": "pp. 212-219"
+    target: https://doi.org/10.1145/237814.237866
+  MOSCA2018:
+    title: "Cybersecurity in an Era with Quantum Computers: Will We Be Ready?"
+    author:
+      - ins: M. Mosca
+        name: Michele Mosca
+    date: 2018
+    seriesinfo:
+      "IEEE Security & Privacy": "Vol. 16, No. 5, pp. 38-41"
+    target: https://doi.org/10.1109/MSP.2018.3761723
 
 --- abstract
 
@@ -153,6 +192,15 @@ disallowed for new protection after 2035.  The CNSA 2.0 suite
 2031.  Operators of long-lived PKI infrastructure must therefore plan
 and execute algorithm migrations across a multi-year window that
 spans certificate lifetimes currently in service.
+
+ML-DSA {{FIPS204}} and ML-KEM {{FIPS203}} are founded on the hardness of
+Module Learning With Errors (MLWE) and Module Short Integer Solution (MSIS)
+problems over polynomial rings — lattice-based problems for which no
+efficient quantum algorithm is known.  SLH-DSA {{FIPS205}} is founded on
+the collision resistance of cryptographic hash functions, providing
+security even against adversaries with quantum computers running Grover's
+algorithm {{GROVER1996}}, subject to the hash length requirements discussed
+in Section 6.2.
 
 The LAMPS Working Group has made substantial progress in defining how
 PQ and PQ/T hybrid algorithms are encoded in X.509 certificates.
@@ -321,6 +369,30 @@ non-repudiation records, this "harvest" phase has effectively already
 begun.  NIST IR 8547 {{NIST-IR-8547}} projects a 2035 hard cutoff for
 applying new cryptographic protection using quantum-vulnerable algorithms.
 
+The specific threat to PKI arises from two quantum algorithms.  Shor's
+algorithm {{SHOR1994}} solves the Integer Factorization Problem (IFP) and
+the Elliptic Curve Discrete Logarithm Problem (ECDLP) in polynomial
+quantum time, directly breaking the security of RSA (whose security rests
+on IFP) and ECDSA/ECDH (whose security rests on ECDLP).  A certificate
+whose public key uses RSA-2048, P-256, or any elliptic curve group of
+equivalent classical security is rendered completely insecure by a
+sufficiently capable CRQC running Shor's algorithm.  Grover's algorithm
+{{GROVER1996}} provides a quadratic speedup for unstructured search,
+effectively halving the bit-security of symmetric keys and hash functions;
+this motivates the SHA-384/SHA-512 requirements in Section 4 and
+Section 6.2 of this document.
+
+The urgency of PQ migration is further quantified by Mosca's inequality
+{{MOSCA2018}}: if the sum of (1) the time remaining until a CRQC is
+available and (2) the secrecy lifetime required for data protected today
+exceeds the time available to complete a migration, then migration should
+be treated as overdue.  For long-lived PKI root certificates with
+25-year validity periods, Mosca's inequality implies that migration cannot
+be safely deferred even if a CRQC is not expected for a decade or more.
+The PQCHC extension directly addresses the migration phase that Mosca's
+inequality makes urgent: providing a machine-verifiable, cryptographically
+bound mechanism for orderly per-certificate PQ transition.
+
 The HNDL and TNFL threat models share a common implication for PKI: the
 window between when a classical key is first used and when a CRQC breaks
 it is the exposure window.  Narrowing this window requires early, orderly
@@ -416,9 +488,10 @@ REQ-1: **Forward SPKI Hash Binding.**
 A solution MUST provide a mechanism for embedding a cryptographic hash of
 the future SubjectPublicKeyInfo in the current certificate, in a field that
 is covered by the CA's signature.  The hash algorithm used MUST itself be
-post-quantum resistant (i.e., resistant to the Grover speedup on collision
-search that would reduce effective security of SHA-256 from 128 bits to
-approximately 85 bits).  SHA-384 or SHA-512, or their SHA-3 equivalents
+post-quantum resistant (i.e., resistant to the Grover speedup on second-preimage search, which
+reduces SHA-256's effective quantum second-preimage resistance from 256
+bits to approximately 128 bits, and SHA-384's from 384 bits to
+approximately 192 bits).  SHA-384 or SHA-512, or their SHA-3 equivalents
 of equivalent or greater length, SHOULD be used.
 
 REQ-2: **Committed Algorithm Identification.**
@@ -871,22 +944,39 @@ resistance of the hashAlgorithm.  An adversary who can find a second
 preimage can substitute a different future key while maintaining the
 hash match.
 
-For a hash algorithm providing n bits of classical second-preimage
-resistance, the quantum adversary advantage under Grover's algorithm
-reduces effective security to approximately n/2 bits.  This implies:
+For a hash algorithm providing n bits of output, the relevant security
+properties for the spkiHash commitment are:
 
-- SHA-256 (128-bit classical → approximately 85-bit quantum second-preimage
-  resistance) SHOULD NOT be used as the sole hash algorithm in environments
-  where a CRQC is considered an active threat within the commitment window.
-- SHA-384 (192-bit classical → approximately 128-bit quantum) is the
-  RECOMMENDED minimum in high-assurance environments.
-- SHA3-512 or SHA-512 (256-bit classical → approximately 170-bit quantum)
-  are preferred for commitments extending to 2035 or beyond.
+- **Second-preimage resistance** (finding a different input with the same
+  hash): classically 2^n operations; under Grover's algorithm applied to
+  second-preimage search, approximately 2^(n/2) quantum operations.
+- **Collision resistance** (finding any two inputs with the same hash):
+  classically 2^(n/2) operations (birthday bound); under the
+  Brassard-Høyer-Tapp (BHT) algorithm, approximately 2^(n/3) quantum
+  operations.
+
+For the spkiHash commitment, the relevant property is **second-preimage
+resistance**: an adversary must find a distinct SubjectPublicKeyInfo that
+hashes to the same value as the committed future SPKI.  The classical
+security level equals the hash output length n; the quantum security level
+under Grover is approximately n/2 bits.  This implies:
+
+- SHA-256 (n=256): 256-bit classical second-preimage resistance;
+  approximately 128-bit quantum second-preimage resistance.  SHA-256 SHOULD
+  NOT be used as the sole hash algorithm in commitments extending beyond
+  2030, as the effective quantum advantage is approaching practical
+  relevance.
+- SHA-384 (n=384): 384-bit classical second-preimage resistance;
+  approximately 192-bit quantum second-preimage resistance.  SHA-384 is
+  the RECOMMENDED minimum for high-assurance environments.
+- SHA-512 (n=512) or SHA3-512 (n=512): 512-bit classical;
+  approximately 256-bit quantum second-preimage resistance.  Preferred
+  for commitments extending to 2035 or beyond.
 
 The hash algorithm selection SHOULD be consistent with the security level
 implied by the committedAlgorithm.  For example, a commitment to
-ML-DSA-87 (NIST security category 5) warrants SHA-512 or SHA3-512 as the
-hash algorithm.
+ML-DSA-87 (NIST security category 5, targeting at least 256 bits of
+classical security) warrants SHA-512 or SHA3-512.
 
 ## Public Key Correlation
 

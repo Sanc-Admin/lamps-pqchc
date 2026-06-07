@@ -1,5 +1,12 @@
 # IETF Final Draft — draft-vicente-lamps-pqchc
 
+[![IETF Datatracker](https://img.shields.io/badge/IETF-Datatracker-blue)](https://datatracker.ietf.org/doc/draft-vicente-lamps-pqchc/)
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](LICENSE)
+[![Patent Pending](https://img.shields.io/badge/Patent-Pending-red.svg)](#ipr--patent-notice)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20584243.svg)](https://doi.org/10.5281/zenodo.20584243)
+[![ORCID](https://img.shields.io/badge/ORCID-0009--0006--6395--5308-A6CE39.svg)](https://orcid.org/0009-0006-6395-5308)
+
+
 **Sanctum SecOps LLC | PATENT PENDING**
 
 ## Abstract
@@ -10,7 +17,7 @@ This repository contains the IETF Internet-Draft for the PQC Hybrid Commitment (
 |---|---|
 | Draft name | `draft-vicente-lamps-pqchc-01` |
 | Working Group | IETF LAMPS |
-| Author | Brian Vicente `<brian@sanctumsecops.com>` |
+| Author | Brian Vicente `<bvicente@sanctumsecops.com>` |
 | Status | Individual Submission |
 | Date | 2026-06-05 |
 

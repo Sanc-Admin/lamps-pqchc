@@ -26,9 +26,13 @@ venue:
 
 author:
  -
+    ins: B. Vicente
     fullname: Brian Vicente
     organization: Sanctum SecOps LLC
-    email: brian@sanctumsecops.com
+    email: bvicente@sanctumsecops.com
+    city: Pine City
+    region: NY
+    country: United States of America
 
 normative:
   RFC2119:
@@ -176,6 +180,80 @@ parties may use the commitment to detect downgrade at renewal time,
 to integrate with ACME Renewal Information (ARI) scheduling, and to
 provide an observable signal of an operator's concrete, binding
 intent to complete PQ migration within a declared time window.
+
+
+# Source and Archival {-}
+
+Source for this draft is maintained at <https://github.com/Sanc-Admin/IETF-Final-Draft>.
+A citable archival version of this document is available at Zenodo:
+<https://doi.org/10.5281/zenodo.20584243>.
+Author ORCID iD: <https://orcid.org/0009-0006-6395-5308>.
+
+# IPR Considerations {-}
+
+The author and Sanctum SecOps LLC hold or have applied for United States
+patent applications covering subject matter related to this document.
+Specifically, the subject matter herein overlaps in part with the disclosure
+of U.S. Provisional Patent Application No. 64/080,137 ("Multi-Tenant Public
+Key Infrastructure with Drift-Gated Issuance, Per-Transaction Semantic
+Consistency Verification, and Topology-Aware Post-Quantum Certificate
+Rotation", filed 2026-06-01) and U.S. Patent Application No. 19/698,870
+("System and Method for Post-Quantum Cryptographic Readiness Observability
+and Feedback in Networked Environments", attorney docket SANC-2026-002,
+filed 2026-06-05).
+
+By posting this Internet-Draft, the author submits to the IETF Trust the
+rights described in Section 5 of BCP 78 and BCP 79. Patent licensing terms
+are not yet known. Implementers and reviewers should consult the IETF
+Datatracker IPR disclosure page for this document for current disclosure
+status. No portion of this document is offered as a trade secret.
+
+# Patent-Pending Claim Scope (Informational) {-}
+
+The PQC Hybrid Commitment (PQCHC) extension specified in this document is
+intentionally narrow and is offered as public prior art. It interoperates
+with, but is distinct from, the following pending claim families identified
+in the IPR Considerations note above. This summary is provided to inform
+implementers of the protected scope; it is not an enabling disclosure and
+does not waive any patent right. The specific algorithms, parameter values,
+weights, thresholds, predicates, sequencing rules, and binding logic that
+practice the pending claims are not disclosed in this Internet-Draft.
+
+Commitment-Driven Drift-Gated Issuance: apparatus, method, and
+non-transitory computer-readable medium claims (related to U.S. Provisional
+Patent Application No. 64/080,137) directed to gating certificate issuance
+and renewal on machine-verifiable cryptographic drift signals.
+
+Topology-Aware Post-Quantum Rotation: apparatus, method, and
+computer-readable medium claims (related to U.S. Provisional Patent
+Application No. 64/080,137) directed to coordinating PQ certificate rotation
+across multi-tenant deployments in a manner that accounts for
+service-dependency topology.
+
+Commitment-Linked Readiness Assessment: apparatus, method, and
+computer-readable medium claims (related to U.S. Patent Application No.
+19/698,870) directed to consuming commitment metadata as one input to a
+quantum-readiness scoring and adequacy classification function.
+
+Nothing in this Internet-Draft is to be construed as disclosing the manner
+in which any of the above claims is reduced to practice.
+
+# Author Credentials {-}
+
+The author holds the following industry certifications, independently
+verifiable through Pearson Credly at
+<https://www.credly.com/users/brian-vicente>:
+
+* CompTIA Security+ ce (2026-03-29 / valid through 2029-03-29)
+* CompTIA Secure Infrastructure Specialist - CSIS Stackable (2026-03-29 / valid through 2029-03-29)
+* CompTIA Secure Cloud Professional - CSCP Stackable (2026-03-29 / valid through 2027-06-29)
+* CompTIA Cloud Admin Professional - CCAP Stackable (2025-10-10 / valid through 2027-06-29)
+* CompTIA IT Operations Specialist - CIOS Stackable (2025-10-10 / valid through 2029-03-29)
+* CompTIA Network+ ce (2025-10-10 / valid through 2029-03-29)
+* CompTIA Cloud+ ce (2024-06-29 / valid through 2027-06-29)
+* Linux Professional Institute Linux Essentials (2024-01-16)
+* CompTIA A+ ce (2023-10-16 / valid through 2029-10-16)
+
 
 --- middle
 

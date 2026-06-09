@@ -1,0 +1,43 @@
+{
+  "title": "PQC Hash Commitment in X.509 Certificates (PQCHC) — draft-vicente-lamps-pqchc",
+  "description": "Source repository for the IETF Internet-Draft draft-vicente-lamps-pqchc. Defines the PQC Hash Commitment (PQCHC) X.509 v3 extension enabling quantum-resistant hash-based commitment binding in certificate issuance. IETF LAMPS Working Group. Patent-pending: USPTO 64/080,137 (2026-06-01), 19/698,870 (2026-06-05). PEN: 1.3.6.1.4.1.65953.",
+  "upload_type": "software",
+  "access_right": "open",
+  "license": "cc-by-4.0",
+  "creators": [
+    {
+      "name": "Vicente, Brian",
+      "affiliation": "Sanctum SecOps LLC",
+      "orcid": "0009-0006-6395-5308"
+    }
+  ],
+  "keywords": [
+    "post-quantum cryptography",
+    "PQC",
+    "X.509",
+    "certificate",
+    "IETF",
+    "LAMPS",
+    "Internet-Draft",
+    "hash commitment",
+    "quantum-resistant",
+    "PKI",
+    "Sanctum SecOps"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://datatracker.ietf.org/doc/draft-vicente-lamps-pqchc/",
+      "relation": "isSupplementTo",
+      "resource_type": "other"
+    },
+    {
+      "identifier": "https://orcid.org/0009-0006-6395-5308",
+      "relation": "isAuthoredBy",
+      "resource_type": "other"
+    }
+  ],
+  "notes": "Patent-pending: U.S. Provisional Patent Application No. 64/080,137 (filed 2026-06-01) and U.S. Patent Application No. 19/698,870 (filed 2026-06-05). This record does not grant any patent license. Sanctum SecOps Private Enterprise Number (PEN): 1.3.6.1.4.1.65953.",
+  "communities": [
+    {"identifier": "zenodo"}
+  ]
+}

@@ -1,0 +1,58 @@
+name: Validate R5 Artifacts
+
+on:
+  push:
+    paths:
+      - 'r5-artifacts/**'
+      - 'generate_r5_artifacts.py'
+      - 'test_artifacts_r5.py'
+      - '.github/workflows/validate-r5-artifacts.yml'
+  pull_request:
+    paths:
+      - 'r5-artifacts/**'
+      - 'generate_r5_artifacts.py'
+      - 'test_artifacts_r5.py'
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: R5 Artifact Validation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install cryptography asn1crypto
+
+      - name: Generate R5 artifacts
+        run: python3 generate_r5_artifacts.py
+
+      - name: Run validation suite
+        env:
+          R5_ARTIFACT_DIR: ./r5-artifacts
+        run: python3 test_artifacts_r5.py
+
+      - name: Upload artifacts on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r5-artifacts-debug
+          path: r5-artifacts/
+          retention-days: 7
+
+      - name: Upload validated artifacts
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r5-artifacts-validated
+          path: r5-artifacts/
+          retention-days: 30

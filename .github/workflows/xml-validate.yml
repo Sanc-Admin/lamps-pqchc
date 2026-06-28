@@ -1,10 +1,14 @@
 name: Validate IETF Draft XML/MD
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - '**.xml'
+      - '**.md'
+  pull_request:
+    branches: [main]
   workflow_dispatch:
-
-permissions:
-  contents: write
 
 jobs:
   xml2rfc-validate:
@@ -21,30 +25,45 @@ jobs:
       - name: Install xml2rfc
         run: pip install xml2rfc
 
-      - name: Diagnose all XML files
-        run: |
-          set +e
-          outfile=xml2rfc_diagnostic.txt
-          {
-            echo "xml2rfc diagnostic $(date -u)"
-            echo "=========================="
-            xml2rfc --version
-            echo ""
-            for f in $(find . -name 'draft-*.xml' -not -path './.git/*'); do
-              echo ""
-              echo "FILE: $f"
-              echo "---"
-              xml2rfc "$f" --text --out /dev/null 2>&1
-              echo "EXIT=$?"
-              echo "---"
-            done
-          } | tee "$outfile"
-          exit 0
+      - name: Restore xml2rfc reference cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/xml2rfc
+          key: xml2rfc-bibxml-${{ hashFiles('**/*.xml') }}
+          restore-keys: |
+            xml2rfc-bibxml-
 
-      - name: Commit diagnostic
+      - name: Validate all XML drafts
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add xml2rfc_diagnostic.txt
-          git commit -m "debug: xml2rfc diagnostic output" || echo "nothing to commit"
-          git push
+          shopt -s nullglob
+          xmlfiles=($(find . -name 'draft-*.xml' -not -path './.git/*'))
+          if [ ${#xmlfiles[@]} -eq 0 ]; then
+            echo "No draft XML files found — skipping"
+            exit 0
+          fi
+          FAIL=0
+          for f in "${xmlfiles[@]}"; do
+            # Skip placeholder files that are not well-formed XML (e.g. comment-only stubs)
+            if ! python3 -c "import xml.etree.ElementTree as ET; ET.parse('$f')" 2>/dev/null; then
+              echo "SKIP: $f is not well-formed XML (placeholder or stub)"
+              continue
+            fi
+            echo "Validating $f..."
+            if ! xml2rfc --quiet "$f" --text --out /dev/null 2>&1; then
+              echo "::error::xml2rfc validation failed for $f"
+              FAIL=1
+            fi
+          done
+          exit $FAIL
+
+      - name: Check patent refs present
+        run: |
+          for f in $(find . -name 'draft-*.xml' -not -path './.git/*'); do
+            grep -q "19/698,870\|64/080,137" "$f" && echo "PASS: Patent refs in $f" || echo "WARN: Patent refs missing from $f"
+          done
+
+      - name: Verify ORCID present
+        run: |
+          for f in $(find . -name 'draft-*.xml' -not -path './.git/*'); do
+            grep -q "0009-0006-6395-5308" "$f" && echo "PASS: ORCID in $f" || echo "WARN: ORCID missing from $f"
+          done

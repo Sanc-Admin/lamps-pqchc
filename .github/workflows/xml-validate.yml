@@ -18,10 +18,22 @@ jobs:
       - name: Install xml2rfc
         run: pip install xml2rfc && xml2rfc --version
 
-      - name: Debug validate draft-vicente-lamps-pqchc-01.xml
+      - name: Test draft-pqchc-01 (no --quiet)
         run: |
-          xml2rfc draft-vicente-lamps-pqchc-01.xml --text --out /dev/null || true
+          xml2rfc draft-vicente-lamps-pqchc-01.xml --text --out /dev/null
+          echo "Exit: $?"
 
-      - name: Debug validate draft-vicente-lamps-rotation-envelope-02.xml
+      - name: Test rotation-envelope-02 (no --quiet)
         run: |
-          xml2rfc draft-vicente-lamps-rotation-envelope-02.xml --text --out /dev/null || true
+          xml2rfc draft-vicente-lamps-rotation-envelope-02.xml --text --out /dev/null
+          echo "Exit: $?"
+
+      - name: Test draft-pqchc-02 (fixed, no --quiet)
+        run: |
+          xml2rfc draft-vicente-lamps-pqchc-02.xml --text --out /dev/null
+          echo "Exit: $?"
+
+      - name: Test with --quiet flag
+        run: |
+          xml2rfc --quiet draft-vicente-lamps-pqchc-01.xml --text --out /dev/null
+          echo "Exit with --quiet: $?"

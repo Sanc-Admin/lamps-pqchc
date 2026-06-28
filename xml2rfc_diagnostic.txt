@@ -1,0 +1,83 @@
+xml2rfc diagnostic Sun Jun 28 16:17:51 UTC 2026
+==========================
+xml2rfc 3.34.0
+
+
+FILE: ./draft-vicente-lamps-rotation-envelope-02.xml
+---
+./draft-vicente-lamps-rotation-envelope-02.xml(260): Error: Did not expect element boilerplate there, at /rfc/middle/section[2]/boilerplate
+./draft-vicente-lamps-rotation-envelope-02.xml(260): Error: Element section has extra content: boilerplate, at /rfc/middle/section[2]/boilerplate
+./draft-vicente-lamps-rotation-envelope-02.xml(895): Error: Element li has extra content: strong, at /rfc/middle/section[5]/section[4]/section[5]/ol/li[3]/strong
+/home/runner/work/lamps-pqchc/lamps-pqchc/draft-vicente-lamps-rotation-envelope-02.xml(11): Error: Invalid document before running preptool.
+Unable to complete processing ./draft-vicente-lamps-rotation-envelope-02.xml
+EXIT=1
+---
+
+FILE: ./draft-vicente-lamps-pqchc-01.xml
+---
+./draft-vicente-lamps-pqchc-01.xml(224): Error: Did not expect element boilerplate there, at /rfc/middle/section[2]/boilerplate
+./draft-vicente-lamps-pqchc-01.xml(224): Error: Element section has extra content: boilerplate, at /rfc/middle/section[2]/boilerplate
+./draft-vicente-lamps-pqchc-01.xml(859): Error: Element li has extra content: strong, at /rfc/middle/section[5]/section[4]/section[5]/ol/li[3]/strong
+/home/runner/work/lamps-pqchc/lamps-pqchc/draft-vicente-lamps-pqchc-01.xml(8): Error: Invalid document before running preptool.
+Unable to complete processing ./draft-vicente-lamps-pqchc-01.xml
+EXIT=1
+---
+
+FILE: ./draft-vicente-lamps-pqchc-02.xml
+---
+/home/runner/work/lamps-pqchc/lamps-pqchc/draft-vicente-lamps-pqchc-02.xml(31): Warning: The document date (2026-06-06) is more than 3 days away from today's date
+/home/runner/work/lamps-pqchc/lamps-pqchc/draft-vicente-lamps-pqchc-02.xml(864): Warning: Was asked to render a deprecated element: <vspace>
+/home/runner/work/lamps-pqchc/lamps-pqchc/draft-vicente-lamps-pqchc-02.xml(1395): Warning: Total table width (74) exceeds available width (69)
+/home/runner/work/lamps-pqchc/lamps-pqchc/draft-vicente-lamps-pqchc-02.xml(512): Warning: Too long line found (L722), 4 characters longer than 72 characters: 
+       hashAlgorithm        AlgorithmIdentifier { DIGEST-ALGORITHM, {...} },
+/home/runner/work/lamps-pqchc/lamps-pqchc/draft-vicente-lamps-pqchc-02.xml(512): Warning: Too long line found (L724), 5 characters longer than 72 characters: 
+       keyAlgorithmHint     AlgorithmIdentifier { ALGORITHM, {...} } OPTIONAL
+/home/runner/work/lamps-pqchc/lamps-pqchc/draft-vicente-lamps-pqchc-02.xml(1337): Warning: Too long line found (L1594), 2 characters longer than 72 characters: 
+       extnValue OCTET STRING {          -- DER encoding of PQCHCommitment
+/home/runner/work/lamps-pqchc/lamps-pqchc/draft-vicente-lamps-pqchc-02.xml(1395): Warning: Too long line found (L1662), 5 characters longer than 72 characters: 
+   +==================+===========+===========+==========+========+=========+
+/home/runner/work/lamps-pqchc/lamps-pqchc/draft-vicente-lamps-pqchc-02.xml(1395): Warning: Too long line found (L1663), 5 characters longer than 72 characters: 
+   |Mechanism         |Forward    |Key-       |Downgrade |ARI     |Non-     |
+/home/runner/work/lamps-pqchc/lamps-pqchc/draft-vicente-lamps-pqchc-02.xml(1395): Warning: Too long line found (L1664), 5 characters longer than 72 characters: 
+   |                  |Commitment?|Specific   |Detection?|Hook?   |Critical?|
+/home/runner/work/lamps-pqchc/lamps-pqchc/draft-vicente-lamps-pqchc-02.xml(1395): Warning: Too long line found (L1665), 5 characters longer than 72 characters: 
+   |                  |           |Binding?   |          |        |         |
+/home/runner/work/lamps-pqchc/lamps-pqchc/draft-vicente-lamps-pqchc-02.xml(1395): Warning: Too long line found (L1666), 5 characters longer than 72 characters: 
+   +==================+===========+===========+==========+========+=========+
+/home/runner/work/lamps-pqchc/lamps-pqchc/draft-vicente-lamps-pqchc-02.xml(1395): Warning: Too long line found (L1667), 5 characters longer than 72 characters: 
+   |draft-reddy PQCHC |Temporal   |No         |Heuristic |No      |Yes      |
+/home/runner/work/lamps-pqchc/lamps-pqchc/draft-vicente-lamps-pqchc-02.xml(1395): Warning: Too long line found (L1668), 5 characters longer than 72 characters: 
+   |(continuityPeriod)|only       |           |only      |        |         |
+/home/runner/work/lamps-pqchc/lamps-pqchc/draft-vicente-lamps-pqchc-02.xml(1395): Warning: Too long line found (L1669), 5 characters longer than 72 characters: 
+   +------------------+-----------+-----------+----------+--------+---------+
+/home/runner/work/lamps-pqchc/lamps-pqchc/draft-vicente-lamps-pqchc-02.xml(1395): Warning: Too long line found (L1670), 5 characters longer than 72 characters: 
+   |RFC 9763          |No (current|Current    |No        |No      |Yes      |
+/home/runner/work/lamps-pqchc/lamps-pqchc/draft-vicente-lamps-pqchc-02.xml(1395): Warning: Too long line found (L1671), 5 characters longer than 72 characters: 
+   |RelatedCertificate|binding)   |cert only  |          |        |         |
+/home/runner/work/lamps-pqchc/lamps-pqchc/draft-vicente-lamps-pqchc-02.xml(1395): Warning: Too long line found (L1672), 5 characters longer than 72 characters: 
+   +------------------+-----------+-----------+----------+--------+---------+
+/home/runner/work/lamps-pqchc/lamps-pqchc/draft-vicente-lamps-pqchc-02.xml(1395): Warning: Too long line found (L1673), 5 characters longer than 72 characters: 
+   |draft-            |No         |Existing   |No        |No      |Yes      |
+/home/runner/work/lamps-pqchc/lamps-pqchc/draft-vicente-lamps-pqchc-02.xml(1395): Warning: Too long line found (L1674), 5 characters longer than 72 characters: 
+   |certdiscovery     |(existing  |cert hash  |          |        |         |
+/home/runner/work/lamps-pqchc/lamps-pqchc/draft-vicente-lamps-pqchc-02.xml(1395): Warning: Too long line found (L1675), 5 characters longer than 72 characters: 
+   |certHash          |cert)      |           |          |        |         |
+/home/runner/work/lamps-pqchc/lamps-pqchc/draft-vicente-lamps-pqchc-02.xml(1395): Warning: Too long line found (L1676), 5 characters longer than 72 characters: 
+   +------------------+-----------+-----------+----------+--------+---------+
+/home/runner/work/lamps-pqchc/lamps-pqchc/draft-vicente-lamps-pqchc-02.xml(1395): Warning: Too long line found (L1685), 5 characters longer than 72 characters: 
+   |draft-ounsworth   |No (current|Current key|No        |No      |N/A      |
+/home/runner/work/lamps-pqchc/lamps-pqchc/draft-vicente-lamps-pqchc-02.xml(1395): Warning: Too long line found (L1686), 5 characters longer than 72 characters: 
+   |external-pubkeys  |key)       |hash       |          |        |         |
+/home/runner/work/lamps-pqchc/lamps-pqchc/draft-vicente-lamps-pqchc-02.xml(1395): Warning: Too long line found (L1687), 5 characters longer than 72 characters: 
+   +------------------+-----------+-----------+----------+--------+---------+
+/home/runner/work/lamps-pqchc/lamps-pqchc/draft-vicente-lamps-pqchc-02.xml(1395): Warning: Too long line found (L1688), 5 characters longer than 72 characters: 
+   |*This document    |*Yes       |*Yes       |*Yes (REQ-|*Yes    |*Yes*    |
+/home/runner/work/lamps-pqchc/lamps-pqchc/draft-vicente-lamps-pqchc-02.xml(1395): Warning: Too long line found (L1689), 5 characters longer than 72 characters: 
+   |(PQCHC -01)*      |(future    |(spkiHash)*|3)*       |(Section|         |
+/home/runner/work/lamps-pqchc/lamps-pqchc/draft-vicente-lamps-pqchc-02.xml(1395): Warning: Too long line found (L1690), 5 characters longer than 72 characters: 
+   |                  |SPKI hash)*|           |          |5.4)*   |         |
+/home/runner/work/lamps-pqchc/lamps-pqchc/draft-vicente-lamps-pqchc-02.xml(1395): Warning: Too long line found (L1691), 5 characters longer than 72 characters: 
+   +------------------+-----------+-----------+----------+--------+---------+
+ Created file /dev/null
+EXIT=0
+---

@@ -4,7 +4,7 @@
 ]>
 <rfc xmlns:xi="http://www.w3.org/2001/XInclude"
      category="info"
-     docName="draft-vicente-lamps\-pqchc-02"
+     docName="draft-vicente-lamps-pqchc-02"
      ipr="trust200902"
      submissionType="IETF"
      xml:lang="en"
@@ -13,7 +13,7 @@
   <front>
     <title abbrev="PQCHC">PQC Hybrid Commitment (PQCHC) X.509 Extension</title>
 
-    <seriesInfo name="Internet-Draft" value="draft-vicente-lamps\-pqchc-02"/>
+    <seriesInfo name="Internet-Draft" value="draft-vicente-lamps-pqchc-02"/>
 
     <author fullname="Brian Vicente" initials="B." surname="Vicente">
       <organization>Sanctum SecOps LLC</organization>

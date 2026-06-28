@@ -16,28 +16,27 @@ jobs:
           python-version: '3.12'
 
       - name: Install xml2rfc
-        run: |
-          pip install xml2rfc
-          xml2rfc --version
+        run: pip install xml2rfc && xml2rfc --version >> "$GITHUB_STEP_SUMMARY"
 
-      - name: Diagnose pqchc-01 (capture all output)
+      - name: Diagnose all XML files
         run: |
           set +e
-          echo "=== STDOUT ==="
-          xml2rfc draft-vicente-lamps-pqchc-01.xml --text --out /dev/null > /tmp/out.txt 2>&1
-          EC=$?
-          cat /tmp/out.txt
-          echo ""
-          echo "=== EXIT CODE: $EC ==="
+          {
+            echo "## xml2rfc diagnostic"
+            for f in $(find . -name 'draft-*.xml' -not -path './.git/*'); do
+              echo ""
+              echo "### File: $f"
+              echo '```'
+              xml2rfc "$f" --text --out /dev/null 2>&1
+              echo "EXIT=$?"
+              echo '```'
+            done
+          } | tee -a "$GITHUB_STEP_SUMMARY"
           exit 0
 
-      - name: Diagnose rotation-envelope-02 (capture all output)
-        run: |
-          set +e
-          echo "=== STDOUT ==="
-          xml2rfc draft-vicente-lamps-rotation-envelope-02.xml --text --out /dev/null > /tmp/out2.txt 2>&1
-          EC=$?
-          cat /tmp/out2.txt
-          echo ""
-          echo "=== EXIT CODE: $EC ==="
-          exit 0
+      - name: Upload diagnostic
+        uses: actions/upload-artifact@v4
+        with:
+          name: xml2rfc-diagnostic
+          path: /home/runner/work/_temp/_runner_file_commands/step_summary_*
+          if-no-files-found: warn

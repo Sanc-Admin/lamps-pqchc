@@ -3,6 +3,9 @@ name: Validate IETF Draft XML/MD
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   xml2rfc-validate:
     name: xml2rfc lint and validate
@@ -16,27 +19,32 @@ jobs:
           python-version: '3.12'
 
       - name: Install xml2rfc
-        run: pip install xml2rfc && xml2rfc --version >> "$GITHUB_STEP_SUMMARY"
+        run: pip install xml2rfc
 
       - name: Diagnose all XML files
         run: |
           set +e
+          outfile=xml2rfc_diagnostic.txt
           {
-            echo "## xml2rfc diagnostic"
+            echo "xml2rfc diagnostic $(date -u)"
+            echo "=========================="
+            xml2rfc --version
+            echo ""
             for f in $(find . -name 'draft-*.xml' -not -path './.git/*'); do
               echo ""
-              echo "### File: $f"
-              echo '```'
+              echo "FILE: $f"
+              echo "---"
               xml2rfc "$f" --text --out /dev/null 2>&1
               echo "EXIT=$?"
-              echo '```'
+              echo "---"
             done
-          } | tee -a "$GITHUB_STEP_SUMMARY"
+          } | tee "$outfile"
           exit 0
 
-      - name: Upload diagnostic
-        uses: actions/upload-artifact@v4
-        with:
-          name: xml2rfc-diagnostic
-          path: /home/runner/work/_temp/_runner_file_commands/step_summary_*
-          if-no-files-found: warn
+      - name: Commit diagnostic
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add xml2rfc_diagnostic.txt
+          git commit -m "debug: xml2rfc diagnostic output" || echo "nothing to commit"
+          git push

@@ -16,24 +16,15 @@ jobs:
           python-version: '3.12'
 
       - name: Install xml2rfc
-        run: pip install xml2rfc && xml2rfc --version
-
-      - name: Test draft-pqchc-01 (no --quiet)
         run: |
-          xml2rfc draft-vicente-lamps-pqchc-01.xml --text --out /dev/null
-          echo "Exit: $?"
+          pip install xml2rfc
+          xml2rfc --version
 
-      - name: Test rotation-envelope-02 (no --quiet)
+      - name: Diagnose xml2rfc failure on pqchc-01
         run: |
-          xml2rfc draft-vicente-lamps-rotation-envelope-02.xml --text --out /dev/null
-          echo "Exit: $?"
-
-      - name: Test draft-pqchc-02 (fixed, no --quiet)
-        run: |
-          xml2rfc draft-vicente-lamps-pqchc-02.xml --text --out /dev/null
-          echo "Exit: $?"
-
-      - name: Test with --quiet flag
-        run: |
-          xml2rfc --quiet draft-vicente-lamps-pqchc-01.xml --text --out /dev/null
-          echo "Exit with --quiet: $?"
+          set +e
+          xml2rfc draft-vicente-lamps-pqchc-01.xml --text --out /dev/null 2>&1
+          echo "EXIT_CODE: $?"
+          echo "---"
+          xml2rfc --verbose draft-vicente-lamps-pqchc-01.xml --text --out /dev/null 2>&1 | head -50
+          echo "EXIT_CODE_VERBOSE: $?"

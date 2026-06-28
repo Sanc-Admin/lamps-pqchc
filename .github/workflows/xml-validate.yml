@@ -8,16 +8,17 @@ on:
       - '**.md'
   pull_request:
     branches: [main]
+  workflow_dispatch:
 
 jobs:
   xml2rfc-validate:
     name: xml2rfc lint and validate
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
@@ -34,7 +35,7 @@ jobs:
           fi
           for f in "${xmlfiles[@]}"; do
             echo "Validating $f..."
-            xml2rfc --quiet --no-network "$f" --text --out /dev/null
+            xml2rfc --quiet "$f" --text --out /dev/null
           done
 
       - name: Check patent refs present

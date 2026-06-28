@@ -20,11 +20,24 @@ jobs:
           pip install xml2rfc
           xml2rfc --version
 
-      - name: Diagnose xml2rfc failure on pqchc-01
+      - name: Diagnose pqchc-01 (capture all output)
         run: |
           set +e
-          xml2rfc draft-vicente-lamps-pqchc-01.xml --text --out /dev/null 2>&1
-          echo "EXIT_CODE: $?"
-          echo "---"
-          xml2rfc --verbose draft-vicente-lamps-pqchc-01.xml --text --out /dev/null 2>&1 | head -50
-          echo "EXIT_CODE_VERBOSE: $?"
+          echo "=== STDOUT ==="
+          xml2rfc draft-vicente-lamps-pqchc-01.xml --text --out /dev/null > /tmp/out.txt 2>&1
+          EC=$?
+          cat /tmp/out.txt
+          echo ""
+          echo "=== EXIT CODE: $EC ==="
+          exit 0
+
+      - name: Diagnose rotation-envelope-02 (capture all output)
+        run: |
+          set +e
+          echo "=== STDOUT ==="
+          xml2rfc draft-vicente-lamps-rotation-envelope-02.xml --text --out /dev/null > /tmp/out2.txt 2>&1
+          EC=$?
+          cat /tmp/out2.txt
+          echo ""
+          echo "=== EXIT CODE: $EC ==="
+          exit 0

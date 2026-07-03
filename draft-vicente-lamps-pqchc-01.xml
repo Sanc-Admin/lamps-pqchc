@@ -221,15 +221,12 @@ provided pursuant to IETF BCPs on intellectual property.</t>
     <section anchor="conventions">
       <name>Conventions and Definitions</name>
 
-      <boilerplate>
-        <section>
           <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
 NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED",
 "MAY", and "OPTIONAL" in this document are to be interpreted as
 described in BCP 14 <xref target="RFC2119"/> <xref target="RFC8174"/> when, and only when, they
 appear in all capitals, as shown here.</t>
-        </section>
-      </boilerplate>
+        
 
       <t>The following terms are used throughout this document.  Terms
 defined in RFC 9794 <xref target="RFC9794"/> ("PQ/T Hybrid terminology") are used
@@ -378,23 +375,23 @@ certificate during the continuity window as suspicious.</t>
 the following limitations:</t>
 
         <ol spacing="normal" type="1">
-          <li><strong>No key specificity:</strong> The declaration says "we will use some PQ
+          <li><t><strong>No key specificity:</strong> The declaration says "we will use some PQ
 algorithm" but does not commit to which key.  An adversary who
 generates a different PQ key pair and presents it at renewal bypasses
 the downgrade heuristic entirely — the relying party observes a PQ
-certificate and accepts it, not knowing a key substitution occurred.</li>
-          <li><strong>TOFU bootstrap problem:</strong> A relying party that connects to a service
+certificate and accepts it, not knowing a key substitution occurred.</t></li>
+          <li><t><strong>TOFU bootstrap problem:</strong> A relying party that connects to a service
 for the first time during the migration window may never have seen a
 PQCHC-bearing certificate.  It has no cached commitment to use as a
-downgrade baseline.</li>
-          <li><strong>Silent cessation:</strong> If the operator or an adversary presents a
+downgrade baseline.</t></li>
+          <li><t><strong>Silent cessation:</strong> If the operator or an adversary presents a
 classical certificate without revoking the prior PQ certificate, the
 temporal declaration cannot distinguish intentional policy change from
-attack.  The draft acknowledges this as an open problem.</li>
-          <li><strong>No ACME-ARI integration:</strong> The temporal declaration provides no
+attack.  The draft acknowledges this as an open problem.</t></li>
+          <li><t><strong>No ACME-ARI integration:</strong> The temporal declaration provides no
 hook for automated certificate management systems to schedule
 commitment-aware renewals that verify the PQ key material is consistent
-with what was committed at issuance time.</li>
+with what was committed at issuance time.</t></li>
         </ol>
 
         <t>A cryptographically bound commitment to specific future key material
@@ -844,19 +841,19 @@ operations.</t>
 RECOMMENDED for operators using ACME certificate management:</t>
 
           <ol spacing="normal" type="1">
-            <li><strong>Scheduling:</strong> When an ACME server manages certificates bearing
+            <li><t><strong>Scheduling:</strong> When an ACME server manages certificates bearing
 the PQCHC extension, the <tt>suggestedWindow</tt> in the <tt>renewalInfo</tt>
 resource for that certificate SHOULD be set to begin no later than
 a reasonable lead time before commitmentNotAfter.  This ensures the
 renewal process completes and the successor certificate is issued
-while the commitment is still in force.</li>
-            <li><strong>Replacement tracking:</strong> When an ACME order is submitted to renew
+while the commitment is still in force.</t></li>
+            <li><t><strong>Replacement tracking:</strong> When an ACME order is submitted to renew
 a PQCHC-bearing certificate, the <tt>replaces</tt> field in the new ACME
 Order SHOULD reference the predecessor certificate (by the
 {issuer, serial} identifier as defined in <xref target="RFC9773"/> Section 5).
 This allows the CA and relying parties to correlate the renewal
-with the outstanding commitment.</li>
-            <li><strong>PQ key validation at order time:</strong> A CA that receives an ACME Order
+with the outstanding commitment.</t></li>
+            <li><t><strong>PQ key validation at order time:</strong> A CA that receives an ACME Order
 with a <tt>replaces</tt> field referencing a PQCHC-bearing predecessor
 certificate SHOULD verify that the SPKI in the new Order's CSR
 matches the spkiHash in the predecessor's FutureKeyCommitment.  If
@@ -866,11 +863,11 @@ appropriate error indicating a commitment mismatch.
 This step is OPTIONAL for CAs that do not implement PQCHC-aware
 order validation, and it requires the CA to have access to the
 predecessor certificate — which is typically possible via the
-issuer's own certificate repository or the <tt>replaces</tt> reference.</li>
-            <li><strong>Explanation URL:</strong> The CA MAY set the <tt>explanationURL</tt> field of
+issuer's own certificate repository or the <tt>replaces</tt> reference.</t></li>
+            <li><t><strong>Explanation URL:</strong> The CA MAY set the <tt>explanationURL</tt> field of
 the <tt>renewalInfo</tt> resource to the same URI as the policyURI in the
 PQCHC extension, providing consistent reference between the ACME
-renewal workflow and the commitment governance documentation.</li>
+renewal workflow and the commitment governance documentation.</t></li>
           </ol>
         </section>
       </section>
@@ -906,13 +903,13 @@ hash match.</t>
 properties for the spkiHash commitment are:</t>
 
         <ul spacing="normal">
-          <li><strong>Second-preimage resistance</strong> (finding a different input with the same
+          <li><t><strong>Second-preimage resistance</strong> (finding a different input with the same
 hash): classically 2^n operations; under Grover's algorithm applied to
-second-preimage search, approximately 2^(n/2) quantum operations.</li>
-          <li><strong>Collision resistance</strong> (finding any two inputs with the same hash):
+second-preimage search, approximately 2^(n/2) quantum operations.</t></li>
+          <li><t><strong>Collision resistance</strong> (finding any two inputs with the same hash):
 classically 2^(n/2) operations (birthday bound); under the
 Brassard-Høyer-Tapp (BHT) algorithm, approximately 2^(n/3) quantum
-operations.</li>
+operations.</t></li>
         </ul>
 
         <t>For the spkiHash commitment, the relevant property is <strong>second-preimage

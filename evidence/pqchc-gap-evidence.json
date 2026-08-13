@@ -1,0 +1,48 @@
+{
+  "_schema": "sanctum-evidence-v1",
+  "_generated": "2026-08-12T20:42:00Z",
+  "_author": "Brian Vicente <bvicente@sanctumsecops.com>",
+  "_orcid": "https://orcid.org/0009-0006-6395-5308",
+  "_organization": "Sanctum SecOps LLC",
+  "_ipr_notice": "Sanctum SecOps LLC / Brian Vicente may hold or intend to file IP rights covering subject matter herein. Published under BCP 78/79. No license granted by publication.",
+  "draft_series": "draft-vicente-lamps-pqchc",
+  "current_revision": "-03",
+  "github_repo": "https://github.com/Sanc-Admin/lamps-pqchc",
+  "core_gap": {
+    "id": "gap-pqchc-1",
+    "title": "No certificate-embedded verifiable PQC migration commitment",
+    "evidence": [
+      {
+        "source": "RFC5280",
+        "section": "4.2",
+        "quote": "The extensions defined for X.509 v3 certificates provide methods for associating additional attributes with users or public keys and for managing a certification hierarchy.",
+        "relevance": "RFC 5280 defines the extension mechanism but no existing extension records a CA migration commitment."
+      },
+      {
+        "source": "FIPS204",
+        "section": "1",
+        "relevance": "ML-DSA is the target algorithm family for PQCHC commitments; no existing X.509 extension records a CA commitment to migrate to this or any PQC algorithm family."
+      }
+    ]
+  },
+  "adjacency_differentiation": [
+    {
+      "adjacent_draft": "draft-ietf-lamps-pq-composite-sigs",
+      "overlap": "Both concern PQC in X.509 certificates",
+      "differentiation": "Composite-sigs defines a new composite signature algorithm. PQCHC is a non-critical extension recording a migration commitment. No signature algorithm is defined or altered."
+    },
+    {
+      "adjacent_draft": "draft-ietf-lamps-cert-binding-for-multi-auth",
+      "overlap": "Both concern multi-algorithm aspects of X.509",
+      "differentiation": "Multi-auth binding enables simultaneous proof of possession of multiple keys. PQCHC records a CA's future migration schedule. Different problem, different solution."
+    }
+  ],
+  "requirements": [
+    {"id": "REQ-PQCHC-1", "title": "Non-Critical Extension"},
+    {"id": "REQ-PQCHC-2", "title": "NIST-Approved Target Algorithm"},
+    {"id": "REQ-PQCHC-3", "title": "Future Migration Date"},
+    {"id": "REQ-PQCHC-4", "title": "Commitment Hash Binding"},
+    {"id": "REQ-PQCHC-5", "title": "Backward Compatibility"},
+    {"id": "REQ-PQCHC-6", "title": "No Composite Signature Alteration"}
+  ]
+}

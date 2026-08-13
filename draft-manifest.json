@@ -1,0 +1,112 @@
+{
+  "manifest_version": "1.0",
+  "generated": "2026-08-12",
+  "author": "Brian Vicente <bvicente@sanctumsecops.com>",
+  "orcid": "https://orcid.org/0009-0006-6395-5308",
+  "organization": "Sanctum SecOps LLC",
+  "repository": "https://github.com/Sanc-Admin/lamps-pqchc",
+  "note": "This manifest is a compilation and validation artifact only. No IP is released or waived by this file. IPR disclosures are governed by IETF BCP 79 and the individual draft IPR notices. All patent rights reserved.",
+
+  "drafts": [
+    {
+      "docName": "draft-vicente-lamps-pqchc-03",
+      "title": "PQC Hybrid Commitment (PQCHC) X.509 v3 Extension",
+      "status": "current",
+      "date": "2026-08-12",
+      "ipr": "trust200902",
+      "ipr_note": "Author has filed or intends to file US patent applications covering subject matter herein. Patent licensing terms not yet known. See IETF Datatracker IPR disclosure page.",
+      "whitespace_created": [
+        "X.509 v3 extension encoding a PQ hybrid commitment (PQCHC) from a certificate subject, asserting post-quantum or composite algorithm continuity across the current certificate lifetime",
+        "Subject-side pqhcCommitment ASN.1 structure carrying algorithm OID, commitment validity window, and optional continuity policy URI",
+        "Non-critical extension deployment path preserving RFC 5280 backward compatibility",
+        "Conceptual gap addressed: subject-side declaration of PQ intent, complementary to CA-side issuance continuity (addressed by rotation-envelope)"
+      ],
+      "patent_enablement": [
+        "Method for embedding a post-quantum algorithm commitment in an X.509 v3 extension field covered by a CA's digital signature at issuance time",
+        "System and method for machine-verifiable subject-side PQ continuity signaling in a multi-year PKI migration window",
+        "Non-critical extension structure allowing legacy relying parties to ignore the field while enabling PQ-aware relying parties to cache and enforce continuity expectations"
+      ],
+      "oid_arcs": [
+        "id-pe-pqhcCommitment (TBD, id-pe arc, IANA pending)",
+        "Experimental: 1.3.6.1.4.1.65953.1.2 (Sanctum SecOps PEN arc, non-production)"
+      ],
+      "related_standards": [
+        "RFC 5280",
+        "FIPS 203 (ML-KEM)",
+        "FIPS 204 (ML-DSA)",
+        "FIPS 205 (SLH-DSA)",
+        "draft-reddy-lamps-x509-pq-commit",
+        "draft-ietf-lamps-pq-composite-sigs",
+        "draft-ietf-lamps-pq-composite-kem"
+      ]
+    },
+    {
+      "docName": "draft-vicente-lamps-rotation-envelope-02",
+      "title": "CA-Side Post-Quantum Rotation Envelope for X.509 Issuance Continuity",
+      "status": "current",
+      "date": "2026-08-12",
+      "ipr": "trust200902",
+      "ipr_note": "Author has filed or intends to file US patent applications covering subject matter herein. Patent licensing terms not yet known. See IETF Datatracker IPR disclosure page.",
+      "whitespace_created": [
+        "CA-side X.509 v3 extension encoding a Rotation Envelope: a cryptographically bound, CA-signed commitment to issuing-CA continuity across the CA's own key-rotation boundaries during PQ migration",
+        "PQRotationEnvelope ASN.1 structure carrying: envelopeValid (BOOLEAN), envelopeCommittedAlgorithmSet (AlgorithmIdentifier), futureKeyCommitment (EnvelopeManifestReference, OPTIONAL), envelopeNotAfter (GeneralizedTime), manifestURI (IA5String, OPTIONAL)",
+        "EnvelopeManifestReference sub-structure: hashAlgorithm, spkiHash (OCTET STRING over DER-encoded future SPKI), keyAlgorithmHint (OPTIONAL)",
+        "Machine-verifiable downgrade detection: relying parties cache spkiHash at issuance and verify it against successor certificate SPKI at renewal",
+        "ACME-ARI integration hook: envelopeNotAfter provides scheduling anchor for RFC 9773 suggestedWindow; CA validates spkiHash match at ACME order time",
+        "Commitment revocation path without certificate revocation: envelopeValid=FALSE signals rescission",
+        "Experimental OID arc 1.3.6.1.4.1.65953.1.1 for pre-IANA deployment",
+        "Conceptual gap addressed: CA-side issuance capability continuity, orthogonal to subject-side intent declaration (PQCHC / draft-reddy)"
+      ],
+      "patent_enablement": [
+        "Method for binding a cryptographic hash of a future SubjectPublicKeyInfo to a current X.509 certificate via a CA-signed non-critical extension, enabling key-specific forward commitment",
+        "System and method for detecting certificate-level downgrade attacks during a PKI post-quantum migration window using a cached spkiHash pre-commitment",
+        "Method for revoking a forward key commitment without revoking the bearer certificate by issuing a successor certificate with envelopeValid set to FALSE",
+        "Integration method for ACME Renewal Information (RFC 9773) with a CA-side PQ rotation envelope, using envelopeNotAfter as the suggestedWindow upper bound and validating CSR SPKI against the committed hash at order time",
+        "Non-critical X.509 v3 extension structure enabling PQ-migration-aware relying parties to enforce commitment semantics while legacy relying parties remain unaffected"
+      ],
+      "oid_arcs": [
+        "id-pe-pq-rotation-envelope (TBD2, id-pe arc, IANA pending)",
+        "id-mod-pq-rotation-envelope-2026 (TBD1, id-mod arc, IANA pending)",
+        "Experimental: 1.3.6.1.4.1.65953.1.1 (Sanctum SecOps PEN arc, non-production)"
+      ],
+      "related_standards": [
+        "RFC 5280",
+        "RFC 9773 (ACME ARI)",
+        "RFC 9763",
+        "RFC 9794",
+        "FIPS 203 (ML-KEM)",
+        "FIPS 204 (ML-DSA)",
+        "FIPS 205 (SLH-DSA)",
+        "NIST IR 8547",
+        "CNSA 2.0",
+        "draft-reddy-lamps-x509-pq-commit",
+        "draft-ietf-lamps-pq-composite-sigs",
+        "draft-ietf-lamps-pq-composite-kem",
+        "draft-ietf-lamps-certdiscovery"
+      ],
+      "zenodo": "https://doi.org/10.5281/zenodo.20584243"
+    }
+  ],
+
+  "whitespace_summary": {
+    "description": "Together these two drafts fill a two-sided gap in IETF LAMPS PQ migration infrastructure. No existing RFC or adopted WG draft provides either mechanism.",
+    "subject_side_gap": "draft-vicente-lamps-pqchc-03 fills the subject-side gap: no mechanism existed for a certificate subject to declare, within the certificate, which PQ or composite algorithm it will use in the successor certificate.",
+    "ca_side_gap": "draft-vicente-lamps-rotation-envelope-02 fills the CA-side gap: no mechanism existed for an issuing CA to cryptographically bind its own issuance capability commitment across its key-rotation boundaries.",
+    "combined_gap_closed": "Together they provide end-to-end PQ migration assurance: subject declares intent (PQCHC), CA guarantees capability (Rotation Envelope), relying party can machine-verify both directions."
+  },
+
+  "patent_enablement_summary": {
+    "basis": "35 U.S.C. § 112 written description and enablement. The ASN.1 modules, OID assignments, processing rules (Sections 5.1-5.4 of rotation-envelope, Sections 4-5 of pqchc), and worked examples (Appendix A of rotation-envelope) together provide sufficient disclosure to enable a person having ordinary skill in the art to make and use the claimed inventions without undue experimentation.",
+    "note": "No IP is released or waived by this manifest. All patent rights are reserved. This manifest is a compilation artifact for IETF submission and internal tracking purposes only."
+  },
+
+  "validation": {
+    "asn1_modules_present": true,
+    "oid_arcs_documented": true,
+    "ipr_notices_present_in_both_drafts": true,
+    "non_critical_extension_requirement": "both drafts specify criticality=FALSE",
+    "backward_compatibility": "RFC 5280 path validation semantics unmodified in both drafts",
+    "hash_algorithm_requirements": "SHA-384 minimum (rotation-envelope Sec 6.2); SHA-256 discouraged post-2030",
+    "nist_ir_8547_compliance": "envelopeNotAfter guidance aligned to 2030/2031/2035 milestones (rotation-envelope Appendix B)"
+  }
+}

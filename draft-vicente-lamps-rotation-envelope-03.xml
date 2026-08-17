@@ -77,7 +77,19 @@ declaration of intent (Reddy et al.) and CA-side guarantee of
 issuance capability (this document).</t>
     </abstract>
   
-    <note title="Source and Archival" removeInRFC="true">
+        <note title="Supplementary Materials" removeInRFC="true">
+      <t>
+        Reference implementation: CygnetLib
+        (<eref target="https://github.com/sanctumsecopsmssp/CygnetLib">https://github.com/sanctumsecopsmssp/CygnetLib</eref>).
+        JSON evidence: algorithm registry, CNSA 2.0 compliance matrix, IETF PQC
+        interoperability status, and ACTV test vectors are in the
+        <tt>evidence/</tt> directory.
+        CAGE/NCAGE: 20XS3. Apex website:
+        <eref target="https://www.sanctumsecops.com/">https://www.sanctumsecops.com/</eref>.
+      </t>
+    </note>
+
+<note title="Source and Archival" removeInRFC="true">
       <t>
         Source for this draft is maintained at
         <eref target="https://github.com/Sanc-Admin/lamps-pqchc">https://github.com/Sanc-Admin/lamps-pqchc</eref>

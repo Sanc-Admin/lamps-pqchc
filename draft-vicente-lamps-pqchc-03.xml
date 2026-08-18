@@ -25,7 +25,7 @@
 
     <date year="2026" month="August" day="12"/>
     <area>Security</area>
-    <workgroup>LAMPS</workgroup>
+    <workgroup>Limited Additional Mechanisms for PKIX and SMIME</workgroup>
     <keyword>X.509</keyword>
     <keyword>post-quantum</keyword>
     <keyword>hybrid</keyword>

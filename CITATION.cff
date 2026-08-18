@@ -8,7 +8,7 @@ authors:
 title: "PQC Hash Commitment in X.509 Certificates (PQCHC)"
 version: "01"
 date-released: "2026-06-08"
-url: "https://github.com/Sanc-Admin/lamps-pqchc"
+url: "https://github.com/sanctumsecopsmssp/lamps-pqchc"
 license: CC-BY-4.0
 keywords:
   - IETF

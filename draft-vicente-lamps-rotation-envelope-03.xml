@@ -19,7 +19,7 @@
       <organization>Sanctum SecOps LLC</organization>
       <address>
         <postal><city>Pine City</city><region>NY</region><country>United States of America</country></postal>
-        <email>brian@sso-labs.com</email>
+        <email>bvicente@sanctumsecops.com</email>
         <uri>https://orcid.org/0009-0006-6395-5308</uri>
       </address>
     </author>
@@ -27,7 +27,7 @@
     <date year="2026" month="August" day="16"/>
 
     <area>Security</area>
-    <workgroup>LAMPS Working Group</workgroup>
+    <workgroup>Limited Additional Mechanisms for PKIX and SMIME</workgroup>
 
     <keyword>post-quantum cryptography</keyword>
     <keyword>X.509</keyword>

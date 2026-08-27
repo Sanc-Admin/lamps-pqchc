@@ -1,0 +1,62 @@
+{
+  "seen": {
+    "draft-ietf-lamps-cert-binding-for-multi-auth": {
+      "rev": "06",
+      "title": "Related Certificates for Use in Multiple Authentications within a Protocol",
+      "wg": "lamps",
+      "first_seen": "2026-08-27T19:56:06Z",
+      "last_seen_rev_at": "2026-08-27T19:56:06Z"
+    },
+    "draft-ietf-lamps-cms-composite-kem": {
+      "rev": "01",
+      "title": "Composite ML-KEM for use in Cryptographic Message Syntax (CMS)",
+      "wg": "lamps",
+      "first_seen": "2026-08-27T19:56:06Z",
+      "last_seen_rev_at": "2026-08-27T19:56:06Z"
+    },
+    "draft-ietf-lamps-cms-composite-sigs": {
+      "rev": "05",
+      "title": "Composite Module-Lattice-Based Digital Signature Algorithm (ML-DSA) for use in Cryptographic Message Syntax (CMS)",
+      "wg": "lamps",
+      "first_seen": "2026-08-27T19:56:06Z",
+      "last_seen_rev_at": "2026-08-27T19:56:06Z"
+    },
+    "draft-ietf-lamps-pq-composite-kem": {
+      "rev": "20",
+      "title": "Composite ML-KEM for use in X.509 Public Key Infrastructure",
+      "wg": "lamps",
+      "first_seen": "2026-08-27T19:56:06Z",
+      "last_seen_rev_at": "2026-08-27T19:56:06Z"
+    },
+    "draft-ietf-lamps-pq-composite-sigs": {
+      "rev": "19",
+      "title": "Composite Module-Lattice-Based Digital Signature Algorithm (ML-DSA) for use in X.509 Public Key Infrastructure",
+      "wg": "lamps",
+      "first_seen": "2026-08-27T19:56:06Z",
+      "last_seen_rev_at": "2026-08-27T19:56:06Z"
+    },
+    "draft-ounsworth-pq-composite-kem": {
+      "rev": "02",
+      "title": "Composite KEM For Use In Internet PKI",
+      "wg": "lamps",
+      "first_seen": "2026-08-27T19:56:06Z",
+      "last_seen_rev_at": "2026-08-27T19:56:06Z"
+    },
+    "draft-perret-prat-lamps-cms-pq-kem": {
+      "rev": "01",
+      "title": "Use of Post-Quantum KEM in the Cryptographic Message Syntax (CMS)",
+      "wg": "lamps",
+      "first_seen": "2026-08-27T19:56:06Z",
+      "last_seen_rev_at": "2026-08-27T19:56:06Z"
+    },
+    "draft-reddy-lamps-x509-pq-commit": {
+      "rev": "01",
+      "title": "X.509 Extensions for PQC or Composite Certificate Hosting Continuity",
+      "wg": "none",
+      "first_seen": "2026-08-27T19:56:06Z",
+      "last_seen_rev_at": "2026-08-27T19:56:06Z"
+    }
+  },
+  "updated": "2026-08-27T19:56:06Z",
+  "queries_source": ".github/prior-art-queries.json"
+}

@@ -1,0 +1,15 @@
+{
+  "repo": "lamps-pqchc",
+  "subject": "PQC Hybrid Commitment (PQCHC) X.509 v3 certificate extension: a non-critical extension carrying a verifiable commitment to a CA's post-quantum migration schedule (LAMPS).",
+  "exclude_name_contains": ["-vicente-"],
+  "queries": [
+    {"label": "LAMPS composite-signature/KEM work (title contains 'composite')", "filters": {"group__acronym": "lamps", "title__icontains": "composite"}},
+    {"label": "name contains 'lamps-pq-composite-sigs'", "filters": {"name__contains": "lamps-pq-composite-sigs"}},
+    {"label": "name contains 'lamps-cert-binding-for-multi-auth'", "filters": {"name__contains": "lamps-cert-binding-for-multi-auth"}},
+    {"label": "name contains 'x509-pq-commit'", "filters": {"name__contains": "x509-pq-commit"}},
+    {"label": "title contains 'post-quantum certificate'", "filters": {"title__icontains": "post-quantum certificate"}},
+    {"label": "title contains 'hybrid certificate'", "filters": {"title__icontains": "hybrid certificate"}},
+    {"label": "title contains 'migration schedule'", "filters": {"title__icontains": "migration schedule"}},
+    {"label": "LAMPS drafts whose title mentions post-quantum", "filters": {"group__acronym": "lamps", "title__icontains": "post-quantum"}}
+  ]
+}
